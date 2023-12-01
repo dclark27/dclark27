@@ -1,4 +1,4 @@
-const otherPossibleDigits = [
+const stringNumbers = [
   'one',
   'two',
   'three',
@@ -15,18 +15,31 @@ export const solution = (input: string): string => {
   let total: number = 0
   const numberOnlyEntry: string[] = []
   entries.forEach((entry) => {
-    otherPossibleDigits.forEach((possibleDigit, index) => {
-      const hasWord = entry.indexOf(possibleDigit)
-      const hasNumber = entry.indexOf('' + (index + 1))
-      if (hasWord > -1 || hasNumber > -1) {
-        numberOnlyEntry.unshift('' + (index + 1))
+    const entryResult: string[] = []
+    for (let i = 0; i < entry.length; i++) {
+      const isIndexNumber = parseInt(entry[i])
+      if (isIndexNumber > 0) {
+        entryResult.push(entry[i])
       }
-    })
-    const left = numberOnlyEntry.pop()
-    const right = numberOnlyEntry.shift()
-    const resultDigits = [right ?? left, left ?? right].join('')
+      stringNumbers.forEach((stringNumber, index) => {
+        const testString = entry.slice(i, stringNumber.length + i)
+        if (testString === stringNumber) {
+          entryResult.push('' + (index + 1))
+        }
+      })
+    }
+    numberOnlyEntry.push(entryResult.join(''))
+  })
+
+  numberOnlyEntry.forEach((entry) => {
+    const arr = entry.split('')
+    const right = arr.pop()
+    const left = arr.shift()
+    const resultDigits = [left ?? right, right ?? left].join('')
     total += Number(resultDigits)
   })
+
+  numberOnlyEntry.push('' + total)
 
   return '' + total
 }

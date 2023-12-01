@@ -14,6 +14,8 @@ export const Day = (props: { day: number }) => {
     }
     if (!inputLoaded) {
       loadInput()
+    } else {
+      runSolution()
     }
   })
 
@@ -36,6 +38,7 @@ export const Day = (props: { day: number }) => {
           <textarea
             id={`input-${day}`}
             name={`input-${day}`}
+            rows={8}
             className="rounded-md border-2 border-gray-300 p-2"
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -47,6 +50,7 @@ export const Day = (props: { day: number }) => {
           </label>
           <textarea
             readOnly
+            rows={8}
             id={`result-${day}`}
             name={`result-${day}`}
             className="rounded-md border-2 border-gray-300 p-2"
