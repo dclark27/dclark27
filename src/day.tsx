@@ -18,7 +18,7 @@ export const Day = (props: { day: number }) => {
   })
 
   const runSolution = async () => {
-    const { solution } = await import(`./solutions/day-${props.day}`)
+    const { solution } = await import(`./solutions/solution-day-${props.day}`)
     const result = solution(input)
     setResult(result)
   }
